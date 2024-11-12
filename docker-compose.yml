@@ -1,0 +1,43 @@
+services:
+
+  db:
+    container_name: detect-problem-postgres
+    image: postgres:16.2
+    command: -c "max_connections=2000"
+    environment:
+      POSTGRES_DB: detectproblem
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: root
+    volumes:
+      - db_local:/data/postgres
+    ports:
+      - "54324:5432"
+    restart: unless-stopped
+    networks:
+      - web_detect_problem
+  
+  php:
+    container_name: detect-problem-apache
+    build:
+      context: .
+      dockerfile: ./compose/conf/Dockerfile
+    volumes:
+      - .:/var/www/html
+    ports:
+      - 8200:80
+    restart: unless-stopped
+    env_file:
+      - compose/envs/app.env
+    depends_on:
+      - db
+    networks:
+      - web_detect_problem
+    entrypoint: /usr/local/bin/entrypoint.sh
+
+volumes:
+  db_local:
+
+networks:
+  web_detect_problem:
+    name: web_detect_problem
+    driver: bridge
