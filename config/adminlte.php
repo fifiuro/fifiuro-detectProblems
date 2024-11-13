@@ -321,11 +321,18 @@ return [
             'can' => 'manage-blog',
         ],
         [
-            'text' => 'pages',
+            'text' => 'Problemas',
+            'url' => 'problem',
+            'icon' => 'fa fa-times-circle',
+            // 'label' => 4,
+            // 'label_color' => 'success',
+        ],
+        [
+            'text' => 'Comentarios',
             'url' => 'admin/pages',
-            'icon' => 'far fa-fw fa-file',
-            'label' => 4,
-            'label_color' => 'success',
+            'icon' => 'fa fa-comments',
+            // 'label' => 4,
+            // 'label_color' => 'success',
         ],
         ['header' => 'account_settings'],
         [
