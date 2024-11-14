@@ -62,19 +62,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="date">Fecha / Hora <span class="text-danger">*</span></label>
-                                        <input type="date" name="date" class="form-control" id="date"
-                                            placeholder="Fecha / Hora" value="{{ old('date') }}" autocomplete="off">
-                                        @error('date')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div> --}}
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="other">Otros <span class="text-danger">*</span></label>
+                                        <label for="other">Otros </label>
                                         <input type="text" name="other" class="form-control" id="other"
                                             placeholder="Otros" value="{{ old('other') }}" autocomplete="off">
                                         @error('other')

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('zone');
             $table->string('street');
             $table->datetime('date');
-            $table->text('other');
+            $table->text('other')->nullable();
             $table->timestamps();
         });
     }

@@ -47,7 +47,7 @@
                                         <div class="form-group">
                                             <label for="zone">Zona <span class="text-danger">*</span></label>
                                             <input type="text" name="zone" class="form-control" id="zone"
-                                                placeholder="Zona" value="{{ old('zone', $request->zone) }}"
+                                                placeholder="Zona" value="{{ old('zone', $data->zone) }}"
                                                 autocomplete="off">
                                             @error('zone')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -58,7 +58,7 @@
                                         <div class="form-group">
                                             <label for="street">Calle <span class="text-danger">*</span></label>
                                             <input type="text" name="street" class="form-control" id="street"
-                                                placeholder="Calle" value="{{ old('street', $request->street) }}"
+                                                placeholder="Calle" value="{{ old('street', $data->street) }}"
                                                 autocomplete="off">
                                             @error('street')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -66,20 +66,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="date">Fecha / Hora <span class="text-danger">*</span></label>
-                                        <input type="date" name="date" class="form-control" id="date"
-                                            placeholder="Fecha / Hora" value="{{ old('date', $request->date) }}"
-                                            autocomplete="off">
-                                        @error('date')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div> --}}
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="other">Otros <span class="text-danger">*</span></label>
+                                        <label for="other">Otros </label>
                                         <input type="text" name="other" class="form-control" id="other"
                                             placeholder="Otros" value="{{ old('other', $data->other) }}"
                                             autocomplete="off">

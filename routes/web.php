@@ -22,7 +22,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/principal', [problemController::class, 'index'])->name('principal');
-Route::get('/problem', [problemController::class, 'create'])->name('problem');
 
 // Rutas Problema
 Route::group(['scheme' => env('ROUTE_HTTPS')], function () {

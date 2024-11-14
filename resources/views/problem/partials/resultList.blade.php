@@ -7,9 +7,11 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th style="width: 10px">#</th>
-                    <th>Nombre Área</th>
-                    <th>Slug</th>
+                    <th>Problema</th>
+                    <th class="text-center">Mapa</th>
+                    <th>Zona</th>
+                    <th>Calle / Avenida</th>
+                    <th>Fecha Regsitro</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -17,32 +19,32 @@
                 @foreach ($data as $key => $d)
                     <tr>
                         <td>{{ $d->problem }}</td>
-                        <td>{{ $d->coordinates }}</td>
+                        <td class="text-center">
+                            <a href="{{ $d->coordinates }}" target="_blank">
+                                <i class="fas fa-map-marked-alt" style="font-size: 20px;"></i>
+                            </a>
+                        </td>
                         <td>{{ $d->zone }}</td>
                         <td>{{ $d->street }}</td>
                         <td>
-                            {{ \Carbon\Carbon::parse($d->date)->format('d/m/Y h:m:s') }}
+                            {{ \Carbon\Carbon::parse($d->date)->format('d/m/Y H:i:s') }}
                         </td>
-                        <td>{{ $d->other }}</td>
-                        <td>
-                            <div class="input-group-prepend">
-                                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                                    Opciones
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li class="dropdown-item">
-                                        <a href="{{ route('problem.edit', $d->id) }}">Editar</a>
-                                    </li>
+                        <td class="text-center">
+                            <a href="{{ route('problem.edit', $d->id) }}" class="btn btn-info">
+                                <i class="fa fa-edit"></i>
+                            </a>
 
-                                    <li class="dropdown-item">
-                                        <a href="#" class="btn-modal" data-toggle="modal"
-                                            data-target="#modal-eliminar" data-id="{{ $d->id }}"
-                                            data-problem="{{ $d->problem }}" data-coordinates="{{ $d->coordinates }}"
-                                            data-zone="{{ $d->zone }}" data-street="{{ $d->street }}" 
-                                            data-date="{{ $d->date }}" data-other="{{ $d->other }}">Eliminar</a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <a href="#" class="btn btn-danger btn-modal" data-toggle="modal" data-target="#modal-eliminar"
+                                data-id="{{ $d->id }}" data-problem="{{ $d->problem }}"
+                                data-coordinates="{{ $d->coordinates }}" data-zone="{{ $d->zone }}"
+                                data-street="{{ $d->street }}" data-date="{{ \Carbon\Carbon::parse($d->date)->format('d/m/Y H:i:s') }}"
+                                data-other="{{ $d->other }}">
+                                <i class="far fa-trash-alt"></i>
+                            </a>
+
+                            <a href="{{ route('problem.edit', $d->id) }}" class="btn bg-indigo">
+                                <i class="fa fa-comment-dots text-white"></i>
+                            </a>
                         </td>
                     </tr>
                 @endforeach
