@@ -7,30 +7,20 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Problema</th>
-                    <th class="text-center">Mapa</th>
-                    <th>Zona</th>
-                    <th>Calle / Avenida</th>
-                    <th>Fecha Regsitro</th>
+                    <th>Nombre</th>
+                    <th>Nombre de Usuario</th>
+                    <th>Email</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($data as $key => $d)
                     <tr>
-                        <td>{{ $d->problem }}</td>
+                        <td>{{ $d->name }} {{ $d->last_name }}</td>
+                        <td>{{ $d->username }}</td>
+                        <td>{{ $d->email }}</td>
                         <td class="text-center">
-                            <a href="{{ $d->coordinates }}" target="_blank">
-                                <i class="fas fa-map-marked-alt" style="font-size: 20px;"></i>
-                            </a>
-                        </td>
-                        <td>{{ $d->zone }}</td>
-                        <td>{{ $d->street }}</td>
-                        <td>
-                            {{ \Carbon\Carbon::parse($d->date)->format('d/m/Y H:i:s') }}
-                        </td>
-                        <td class="text-center">
-                            <a href="{{ route('problem.edit', $d->id) }}" class="btn btn-info">
+                            <a href="{{ route('users.edit', $d->id) }}" class="btn btn-info">
                                 <i class="fa fa-edit"></i>
                             </a>
 
@@ -40,10 +30,6 @@
                                 data-street="{{ $d->street }}" data-date="{{ \Carbon\Carbon::parse($d->date)->format('d/m/Y H:i:s') }}"
                                 data-other="{{ $d->other }}">
                                 <i class="far fa-trash-alt"></i>
-                            </a>
-
-                            <a href="{{ route('comments.list', $d->id) }}" class="btn bg-indigo">
-                                <i class="fa fa-comment-dots text-white"></i>
                             </a>
                         </td>
                     </tr>

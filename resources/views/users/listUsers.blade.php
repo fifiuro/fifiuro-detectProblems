@@ -3,23 +3,23 @@
 @section('title', 'Detección de Problemas')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Administración de Problemas Detectados</h1>
+    <h1 class="m-0 text-dark">Administración de Usuarios</h1>
 @stop
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            @include('problem.partials.searchPanel')
+            @include('users.partials.searchPanel')
         </div>
 
         <div class="col-md-12">
             @if (isset($data))
-                @include('problem.partials.resultList')
+                @include('users.partials.resultList')
             @endif
         </div>
     </div>
 
-    @include('problem.partials.windowDelete')
+    @include('users.partials.windowDelete')
 
     <script type="module">
         $(document).ready(function() {
@@ -44,7 +44,7 @@
                 let date = $(this).data("date");
                 let other = $(this).data("other");
 
-                var ruta = "{{ route('problem.destroy', ['id' => ':id']) }}";
+                var ruta = "{{ route('users.destroy', ['id' => ':id']) }}";
                 ruta = ruta.replace(':id', id);
 
                 $('.problem').html(problem);
