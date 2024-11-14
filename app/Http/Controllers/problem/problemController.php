@@ -12,7 +12,7 @@ class problemController extends Controller
      */
     public function index()
     {
-        return view('principal');
+        return view('problem.listProblem');
     }
 
     /**
@@ -20,7 +20,8 @@ class problemController extends Controller
      */
     public function create()
     {
-        return view('problem.problem');    }
+        return view('problem.newProblem');
+    }
 
     /**
      * Store a newly created resource in storage.
