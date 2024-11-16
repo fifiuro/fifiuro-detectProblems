@@ -17,7 +17,7 @@ class commentsController extends Controller
     {
         $header = Problem::find($problem_id);
         $data = comments::with('problem')->with('user')->where('problem_id', '=', $problem_id)->get();
-        
+
         return $this->returnSearch(session('action') ? session('action') : 'find', session('type') ? session('type') : 'success', $header, $data);
     }
 
@@ -65,7 +65,7 @@ class commentsController extends Controller
     {
         $data = comments::find($id);
 
-        return view('comments.editComment')->with('id')->with('problem_id', $data->problem_id)->with('data', $data);
+        return view('comments.editComment')->with('id', $id)->with('problem_id', $data->problem_id)->with('data', $data);
     }
 
     /**

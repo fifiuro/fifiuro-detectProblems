@@ -37,13 +37,19 @@
 
             $(".btn-modal").click(function() {
                 let id = $(this).data("id");
-                let name = $(this).data("name");
-                let slug = $(this).data("slug");
+                let problem_id = $(this).data("problem_id");
+                let type = $(this).data("type");
+                let comment = $(this).data("comment");
                 var ruta = "{{ route('comments.destroy', ['id' => ':id', 'problem_id' => ':p']) }}";
                 ruta = ruta.replace(':id', id);
-                ruta = ruta.replace(':p', id);
-                $('.name').html(name);
-                $('.slug').html(slug);
+                ruta = ruta.replace(':p', problem_id);
+                if (type == 'C') {
+                    $('.type').html("Comentario");
+                }
+                if (type == 'O') {
+                    $('.type').html("Oficial");
+                }
+                $('.comment').html(comment);
                 $('#btn-eliminar').attr("href", ruta)
             });
 
