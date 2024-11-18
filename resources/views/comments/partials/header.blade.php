@@ -47,9 +47,11 @@
                 </div>
             </div>
             <div class="col-md-1 text-right">
-                <a href="{{ route('comments.new', $header->id) }}" class="btn btn-success">
-                    <i class="fas fa-plus"></i>
-                </a>
+                @if (!$data->oficial)
+                    <a href="{{ route('comments.new', $header->id) }}" class="btn btn-success">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                @endif
                 <a href="{{ route('problem.list') }}" class="btn btn-danger">
                     <i class="fas fa-arrow-left"></i>
                 </a>

@@ -17,7 +17,14 @@ class commentsController extends Controller
     {
         $header = Problem::find($problem_id);
         $data = comments::with('problem')->with('user')->where('problem_id', '=', $problem_id)->get();
+        $oficial = false;
 
+        foreach ($data as $key => $d) {
+            if ($d->type == 'O') {
+                $oficial = true;
+            }
+        }
+        $data->oficial = $oficial;
         return $this->returnSearch(session('action') ? session('action') : 'find', session('type') ? session('type') : 'success', $header, $data);
     }
 

@@ -17,7 +17,7 @@
                 <form action="{{ route('comments.update', $id) }}" method="POST">
                     @csrf
                     @method('POST')
-                    <input type="text" name="problem_id" id="problem_id" value="{{ $problem_id }}">
+                    <input type="hidden" name="problem_id" id="problem_id" value="{{ $problem_id }}">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">

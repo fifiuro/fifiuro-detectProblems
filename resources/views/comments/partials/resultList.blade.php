@@ -27,21 +27,40 @@
                             @isset($d->user->name)
                                 {{ $d->user->name }} {{ $d->user->last_name }}
                             @else
-                                No hay nombre...
+                                NN
                             @endisset
                         </td>
                         <td>{{ $d->comment }}</td>
                         <td>
-                            <a href="{{ route('comments.edit', $d->id) }}" class="btn btn-info">
-                                <i class="fa fa-edit"></i>
-                            </a>
-                            {{-- {{ dd($header) }} --}}
-                            <a href="#" class="btn btn-danger btn-modal" data-toggle="modal"
-                                data-target="#modal-eliminar" data-problem_id="{{ $header->id }}" data-id="{{ $d->id }}"
-                                data-type="{{ $d->type }}" data-comment="{{ $d->comment }}">
-                                <i class="far fa-trash-alt"></i>
-                            </a>
+                            @if ($d->type == 'O')
+                                @if ($data->oficial)
+                                    <a href="{{ route('comments.edit', $d->id) }}" class="btn btn-info">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-danger btn-modal" data-toggle="modal"
+                                        data-target="#modal-eliminar" data-problem_id="{{ $header->id }}"
+                                        data-id="{{ $d->id }}" data-type="{{ $d->type }}"
+                                        data-comment="{{ $d->comment }}">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>
+                                @endif
+                            @endif
+
+                            @if ($d->type == 'C')
+                                @if (!$data->oficial)
+                                    <a href="{{ route('comments.edit', $d->id) }}" class="btn btn-info">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-danger btn-modal" data-toggle="modal"
+                                        data-target="#modal-eliminar" data-problem_id="{{ $header->id }}"
+                                        data-id="{{ $d->id }}" data-type="{{ $d->type }}"
+                                        data-comment="{{ $d->comment }}">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>
+                                @endif
+                            @endif
                         </td>
+
                     </tr>
                 @endforeach
             </tbody>

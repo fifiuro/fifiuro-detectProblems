@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreign('problem_id')->references('id')->on('problem');
             //
             // Llave foranea
-            $table->uuid('user_id');
+            $table->uuid('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             // 
             $table->text('comment');

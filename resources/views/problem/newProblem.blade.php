@@ -30,14 +30,23 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="coordinates">Coordenadas <span class="text-danger">*</span></label>
-                                        <input type="text" name="coordinates" class="form-control" id="coordinates"
-                                            placeholder="Coordenadas" value="{{ old('coordinates') }}" autocomplete="off">
-                                        @error('coordinates')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                <div class="row">
+                                    <div class="col-md-11">
+                                        <div class="form-group">
+                                            <label for="coordinates">Coordenadas <span class="text-danger">*</span></label>
+                                            <input type="text" name="coordinates" class="form-control" id="coordinates"
+                                                placeholder="Coordenadas" value="{{ old('coordinates') }}"
+                                                autocomplete="off">
+                                            @error('coordinates')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 text-center" style="margin-top: auto; margin-bottom: auto;">
+                                        <a href="https://www.google.com/maps/@-16.5047299,-68.1550654,13z?authuser=0&entry=ttu&g_ep=EgoyMDI0MTExMy4xIKXMDSoASAFQAw%3D%3D"
+                                            target="_blank" class="text-primary">
+                                            <i class="fas fa-globe-americas" style="font-size: 35px"></i>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="row">

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\comments\commentsController;
+use App\Http\Controllers\firstPage\firstPageController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\problem\problemController;
 use App\Http\Controllers\users\usersController;
@@ -22,10 +24,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/principal', [problemController::class, 'index'])->name('principal');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/principal', [problemController::class, 'index'])->name('principal');
 
 Route::group(['scheme' => env('ROUTE_HTTPS')], function () {
+    // Ruta Principal
+    Route::get('/', [firstPageController::class, 'index'])->name('first.page');
     // Rutas Problema
     Route::get('/problem.list', [problemController::class, 'index'])->name('problem.list');
     Route::get('/problem.find', [problemController::class, 'show'])->name('problem.find');
