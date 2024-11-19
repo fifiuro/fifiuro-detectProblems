@@ -45,6 +45,10 @@
                             <a href="{{ route('comments.list', $d->id) }}" class="btn bg-indigo">
                                 <i class="fa fa-comment-dots text-white"></i>
                             </a>
+
+                            <a href="{{ route('photos.list', $d->id) }}" class="btn bg-yellow">
+                                <i class="fas fa-camera-retro text-black"></i>
+                            </a>
                         </td>
                     </tr>
                 @endforeach

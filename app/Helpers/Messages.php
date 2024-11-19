@@ -48,6 +48,11 @@ class Messages
                         $message = 'ERROR: NO SE PUDO REALIZAR LA TAREA SOLICITADA, POR FAVOR CONTACTESE CON SISTEMAS PARA SOLUCIONAR EL PROBLEMA.';
                         $tipo = 'bg-danger';
                         break;
+                    case 'not-image-format':
+                        $titulo = 'Error';
+                        $message = 'ERROR: NO LAS IMAGENES ENVIADOS NO SON DEL TIPO IMAGEN PERMITIDO.';
+                        $tipo = 'bg-danger';
+                        break;
                 }
                 break;
             case 'edit':

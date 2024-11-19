@@ -3,6 +3,7 @@
 use App\Http\Controllers\comments\commentsController;
 use App\Http\Controllers\firstPage\firstPageController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\photos\photosController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\problem\problemController;
 use App\Http\Controllers\users\usersController;
@@ -45,6 +46,11 @@ Route::group(['scheme' => env('ROUTE_HTTPS')], function () {
     Route::get('/comments.edit/{id}', [commentsController::class, 'edit'])->name('comments.edit');
     Route::post('/comments.update/{id}', [commentsController::class, 'update'])->name('comments.update');
     Route::get('/comments.destroy/{id}/{problem_id}', [commentsController::class, 'destroy'])->name('comments.destroy');
+    // Rutas de Photos
+    Route::get('/photos.list/{problem_id}', [photosController::class, 'index'])->name('photos.list');
+    Route::get('/photos.new/{problem_id}', [photosController::class, 'create'])->name('photos.new');
+    Route::post('/photos.create', [photosController::class, 'store'])->name('photos.create');
+    Route::get('/photos.destroy/{id}/{problem_id}', [photosController::class, 'destroy'])->name('photos.destroy');
     // Rutas de Usuarios
     Route::get('/users.list', [usersController::class, 'index'])->name('users.list');
     Route::get('/users.find', [usersController::class, 'show'])->name('users.find');
