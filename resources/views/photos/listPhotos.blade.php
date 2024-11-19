@@ -38,19 +38,24 @@
             $(".btn-modal").click(function() {
                 let id = $(this).data("id");
                 let problem_id = $(this).data("problem_id");
-                let type = $(this).data("type");
-                let comment = $(this).data("comment");
-                var ruta = "{{ route('photos.destroy', ['id' => ':id', 'problem_id' => ':p']) }}";
-                ruta = ruta.replace(':id', id);
-                ruta = ruta.replace(':p', problem_id);
-                if (type == 'C') {
-                    $('.type').html("Comentario");
+                let path = $(this).data("path");
+                let type = $(this).data('type');
+                $('#img-unico').attr('src', path);
+
+                if (type == 'delete') {
+                    var ruta = "{{ route('photos.destroy', ['id' => ':id', 'problem_id' => ':p']) }}";
+                    ruta = ruta.replace(':id', id);
+                    ruta = ruta.replace(':p', problem_id);
+                    $('#btn-eliminar').attr("href", ruta)
+                    $('#title').html("¿Esta seguro de eliminar la Imágen?");
+                    $('#footer').attr("style", "display:inline");
+                    $('#img-unico').attr("style", "width:300px")
                 }
-                if (type == 'O') {
-                    $('.type').html("Oficial");
+                if (type == 'view') {
+                    $('#title').html("Vista Previa");
+                    $('#footer').attr("style", "display:none");
+                    $('#img-unico').attr("style", "width:600px")
                 }
-                $('.comment').html(comment);
-                $('#btn-eliminar').attr("href", ruta)
             });
 
         });

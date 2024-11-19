@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Photos;
 use App\Models\Problem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class photosController extends Controller
 {
@@ -38,7 +39,7 @@ class photosController extends Controller
             $request->validate([
                 'images.*' => 'required|image|mimes:png,jpg,jpeg|max:4048'
             ]);
-            
+
             if ($request->hasFile('images')) {
                 $good = 0;
                 $bad = 0;
@@ -70,16 +71,6 @@ class photosController extends Controller
             if ($bad > 0) {
                 return redirect()->route('photos.list', $request->problem_id)->with('action', 'add')->with('type', 'danger');
             }
-
-            // $data = new Photos();
-            // $data->problem_id = $request->problem_id;
-            // $data->filename = $request->filename;
-            // $data->path = $request->path;
-            // if ($data->save()) {
-            //     return redirect()->route('photos.list', $request->problem_id)->with('action', 'add')->with('type', 'success');
-            // } else {
-            //     return redirect()->route('photos.list', $request->problem_id)->with('action', 'add')->with('type', 'danger');
-            // }
         } catch (\Throwable $th) {
             return redirect()->route('photos.list', $request->problem_id)->with('action', 'add')->with('type', 'general-error');
         }
@@ -117,10 +108,16 @@ class photosController extends Controller
         try {
             $data = Photos::find($id);
             if ($data) {
-                if ($data->delete()) {
-                    return redirect()->route('photos.list', $problem_id)->with('action', 'delete')->with('type', 'success');
-                } else {
-                    return redirect()->route('photos.list', $problem_id)->with('action', 'delete')->with('type', 'danger');
+                $filename = $data->filename;
+                $path = 'photos/'.$filename;
+
+                if (Storage::disk('public')->exists($path)) {
+                    Storage::disk('public')->delete($path);
+                    if ($data->delete()) {
+                        return redirect()->route('photos.list', $problem_id)->with('action', 'delete')->with('type', 'success');
+                    } else {
+                        return redirect()->route('photos.list', $problem_id)->with('action', 'delete')->with('type', 'danger');
+                    }
                 }
             } else {
                 return redirect()->route('photos.list', $problem_id)->with('action', 'delete')->with('type', 'exists');
