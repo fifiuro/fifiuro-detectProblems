@@ -5,7 +5,7 @@ namespace App\Http\Controllers\users;
 use App\Helpers\Messages;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\users\usersCreateRequest;
-use App\Models\Users;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class usersController extends Controller
@@ -15,7 +15,7 @@ class usersController extends Controller
      */
     public function index()
     {
-        $data = Users::paginate(10);
+        $data = User::paginate(10);
         return $this->returnSearch(session('action') ? session('action') : 'find', session('type') ? session('type') : 'success', $data);
     }
 
@@ -24,7 +24,7 @@ class usersController extends Controller
      */
     public function show(Request $request)
     {
-        $data = Users::when($request->filled('username'), function ($query) use ($request) {
+        $data = User::when($request->filled('username'), function ($query) use ($request) {
             $query->where('username', 'like', '%' . $request->username . '%');
         })
         ->paginate(10);
@@ -45,7 +45,7 @@ class usersController extends Controller
     public function store(usersCreateRequest $request)
     {
         try {
-            $data = new Users();
+            $data = new User();
             $data->name = $request->name;
             $data->last_name = $request->last_name;
             $data->username = $request->username;
@@ -66,7 +66,7 @@ class usersController extends Controller
      */
     public function edit(string $id)
     {
-        $data = Users::find($id);
+        $data = User::find($id);
 
         return view('users.editUser')->with('id',$id)->with('data',$data);
     }
@@ -77,7 +77,7 @@ class usersController extends Controller
     public function update(Request $request, string $id)
     {
         try {
-            $data = Users::find($id);
+            $data = User::find($id);
             if ($data) {
                 $data->name = $request->name;
                 $data->last_name = $request->last_name;
@@ -105,7 +105,7 @@ class usersController extends Controller
     public function destroy(string $id)
     {
         try {
-            $data = Users::find($id);
+            $data = User::find($id);
             if($data){
                 if($data->delete()){
                     return redirect()->route('users.list')->with('action', 'delete')->with('type', 'success');

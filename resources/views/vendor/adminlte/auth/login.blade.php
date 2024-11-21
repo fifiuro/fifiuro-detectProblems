@@ -43,6 +43,9 @@
         </div> --}}
 
         {{-- Username field --}}
+        <div class="col-md-12 text-center">
+            <img src="{{ asset('storage/logo/logo.jpeg') }}" alt="Logo" style="width:200px; height:auto;">
+        </div>
         <p class="text-center">
             <strong>Identifiquese para Ingresar.</strong>
         </p>
@@ -66,7 +69,7 @@
         {{-- Password field --}}
         <div class="input-group mb-3">
             <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                placeholder="{{ __('adminlte::adminlte.password') }}">
+                placeholder="Contraseña">
 
             <div class="input-group-append">
                 <div class="input-group-text">
@@ -107,7 +110,7 @@
 
 @section('auth_footer')
     <p class="text-center">
-        Todos los Derechos reservados <strong>2024</strong>
+        Todos los Derechos reservados <strong>2025</strong>
     </p>
     {{-- Password reset link --}}
     {{-- @if ($password_reset_url)

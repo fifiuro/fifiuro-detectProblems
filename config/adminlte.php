@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Detección de Problemas',
     'title_prefix' => '',
     'title_postfix' => '',
 
