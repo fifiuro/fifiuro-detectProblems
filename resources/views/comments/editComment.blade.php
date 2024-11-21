@@ -42,6 +42,15 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="solution">Posible Solución <span class="text-danger">*</span></label>
+                                        <textarea name="solution" id="solution" cols="30" rows="5" class="form-control">{{ old('solution', $data->solution) }}</textarea>
+                                        @error('solution')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -10,6 +10,7 @@
                     <th>Tipo</th>
                     <th>Nombre</th>
                     <th>Comentario</th>
+                    <th>Solución</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -31,6 +32,7 @@
                             @endisset
                         </td>
                         <td>{{ $d->comment }}</td>
+                        <td>{{ $d->solution }}</td>
                         <td>
                             @if ($d->type == 'O')
                                 @if ($data->oficial)

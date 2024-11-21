@@ -11,7 +11,7 @@
                     <th class="text-center">Mapa</th>
                     <th>Zona</th>
                     <th>Calle / Avenida</th>
-                    <th>Fecha Regsitro</th>
+                    <th>Fecha Registro</th>
                     <th>Acciones</th>
                 </tr>
             </thead>

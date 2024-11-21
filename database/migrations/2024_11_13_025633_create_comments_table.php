@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             // 
             $table->text('comment');
+            $table->text('solution');
             $table->string('type');
             $table->timestamps();
         });

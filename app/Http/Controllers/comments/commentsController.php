@@ -46,6 +46,7 @@ class commentsController extends Controller
             $data->problem_id = $request->problem_id;
             $data->user_id = $request->user_id;
             $data->comment = $request->comment;
+            $data->solution = $request->solution;
             $data->type = $request->type;
             if ($data->save()) {
                 return redirect()->route('comments.list', $request->problem_id)->with('action', 'add')->with('type', 'success');

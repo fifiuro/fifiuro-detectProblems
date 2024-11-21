@@ -17,7 +17,7 @@ class photosController extends Controller
     public function index($problem_id)
     {
         $header = Problem::find($problem_id);
-        $data = Photos::with('problem')->get();
+        $data = Photos::with('problem')->where('problem_id', '=', $problem_id)->get();
 
         return $this->returnSearch(session('action') ? session('action') : 'find', session('type') ? session('type') : 'success', $header, $data);
     }
@@ -109,7 +109,7 @@ class photosController extends Controller
             $data = Photos::find($id);
             if ($data) {
                 $filename = $data->filename;
-                $path = 'photos/'.$filename;
+                $path = 'photos/' . $filename;
 
                 if (Storage::disk('public')->exists($path)) {
                     Storage::disk('public')->delete($path);

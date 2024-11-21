@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\firstPage;
 
 use App\Http\Controllers\Controller;
+use App\Models\Photos;
+use App\Models\Problem;
 use Illuminate\Http\Request;
 
 class firstPageController extends Controller
@@ -12,7 +14,13 @@ class firstPageController extends Controller
      */
     public function index()
     {
-        return view('firstPage');
+        $data = Problem::paginate(10);
+        foreach ($data as $key => $value) {
+            $photos = Photos::where('problem_id','=',$value->id)->first();
+            $value->path = isset($photos) ? $photos->path : '';
+        }
+        // $data = Photos::with('problem')->paginate(10);
+        return view('firstPage')->with('data', $data);
     }
 
     /**
