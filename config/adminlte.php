@@ -328,6 +328,13 @@ return [
             // 'label_color' => 'success',
         ],
         [
+            'text' => 'Usuarios',
+            'url' => 'users.list',
+            'icon' => 'fas fa-user',
+            // 'label' => 4,
+            // 'label_color' => 'success',
+        ],
+        [
             'text' => 'Reportes',
             'icon' => 'fa fa-file-alt',
             'submenu' => [

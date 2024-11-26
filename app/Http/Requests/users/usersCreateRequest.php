@@ -26,17 +26,7 @@ class usersCreateRequest extends FormRequest
             'last_name' => 'required|max:255',
             'username'  => 'required|max:255|unique:users',
             'email'     => 'required|max:255|unique:users',
-            'password'  => [
-                'required',
-                'string',
-                'min:8',
-                'regex:/[a-z]/',
-                'regex:/[A-Z]/',
-                'regex:/[0-9]/',
-                'regex:/[@$!%*#?&]/',
-                'confirmed',
-                'regex:/^\S*$/u'
-            ],
+            'password'  => 'required'
         ];
     }
 
@@ -53,14 +43,7 @@ class usersCreateRequest extends FormRequest
             'email.required'            => 'El Correo Electrónico es obligatorio.',
             'email.max'                 => 'El Correo Electrónico debe tener como maximo de caracteres 255.',
             'email.unique'              => 'El Correo Electrónico debe ser unico.',
-            'password.required'         => 'La Contraseña es obligatorio.',
-            'password.string'           => 'La contraseña debe ser una cadena de texto.',
-            'password.min'              => 'La contraseña debe tener al menos 8 caracteres.',
-            'password.regex'            => 'La contraseña debe contener al menos una letra minúscula, una letra mayúscula, un número y un carácter especial.',
-            'password.confirmed'        => 'La confirmación de la contraseña no coincide.',
-            'password.regex:/^\S*$/u'   => 'La contraseña no debe contener espacios.',
-            'password.confirmed'        => 'Las Contraseñas no coinciden.',
-            'password.strong_password'  => 'Las Contraseñas que se escribio es debil y esta en la lista de contraseñas comunes.',
+            'password.required'         => 'La Contraseña es obligatorio'
         ];
     }
 }

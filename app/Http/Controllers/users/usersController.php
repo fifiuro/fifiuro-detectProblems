@@ -50,6 +50,7 @@ class usersController extends Controller
             $data->last_name = $request->last_name;
             $data->username = $request->username;
             $data->email = $request->email;
+            $data->type = $request->type;
             $data->password = bcrypt($request->password);
             if ($data->save()) {
                 return redirect()->route('users.list')->with('action', 'add')->with('type', 'success');
@@ -83,6 +84,7 @@ class usersController extends Controller
                 $data->last_name = $request->last_name;
                 $data->username = $request->username;
                 $data->email = $request->email;
+                $data->type = $request->type;
                 if(isset($request->password)){
                     $data->password = bcrypt($request->password);
                 }

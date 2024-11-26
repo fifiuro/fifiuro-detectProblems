@@ -31,6 +31,7 @@ Route::group(['scheme' => env('ROUTE_HTTPS')], function () {
     Route::get('/problem.edit/{id}', [problemController::class, 'edit'])->name('problem.edit')->middleware(['auth']);
     Route::post('/problem.update/{id}', [problemController::class, 'update'])->name('problem.update')->middleware(['auth']);
     Route::get('/problem.destroy/{id}', [problemController::class, 'destroy'])->name('problem.destroy')->middleware(['auth']);
+    Route::get('/problem.preview/{id}', [problemController::class, 'preview'])->name('problem.preview')->middleware(['auth']);
     // Rutas de comentarios
     Route::get('/comments.list/{problem_id}', [commentsController::class, 'index'])->name('comments.list')->middleware(['auth']);
     Route::get('/comments.new/{problem_id}', [commentsController::class, 'create'])->name('comments.new')->middleware(['auth']);

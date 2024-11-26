@@ -9,7 +9,6 @@
 @section('content')
     <div class="row">
         @foreach ($data as $key => $d)
-            {{-- {{ dd($d) }} --}}
             <div class="col-md-4">
                 <div class="card card-info">
                     <div class="card-header">
@@ -18,7 +17,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="col-md-12">
+                                <div class="col-md-12 text-center">
                                     @isset($d->path)
                                         <img src="{{ asset('storage/' . $d->path) }}" alt="{{ $d->filename }}"
                                             style="width:200px; height:auto;">
@@ -53,6 +52,9 @@
                         </a>
                         <a href="{{ route('photos.list', $d->id) }}" class="btn bg-yellow">
                             <i class="fas fa-camera-retro text-black"></i>
+                        </a>
+                        <a href="{{ route('problem.preview', $d->id) }}" class="btn bg-success">
+                            <i class="far fa-eye"></i>
                         </a>
                     </div>
                 </div>

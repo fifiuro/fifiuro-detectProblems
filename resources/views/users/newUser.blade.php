@@ -19,6 +19,19 @@
                     @method('POST')
                     <div class="card-body">
                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="type">Tipo de Usuario <span class="text-danger">*</span></label>
+                                    <select name="type" id="type" class="form-control">
+                                        <option value="">Selecionar una opción</option>
+                                        <option value="user" {{ old('type') == 'user' ? 'selected' : '' }}>Usuario</option>
+                                        <option value="admin" {{ old('type') == 'admin' ? 'selected' : '' }}>Administrador</option>
+                                    </select>
+                                    @error('type')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="name">Nombre(s) <span class="text-danger">*</span></label>

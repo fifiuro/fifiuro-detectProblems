@@ -5,6 +5,8 @@ namespace App\Http\Controllers\problem;
 use App\Helpers\Messages;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\problem\problemCreateRequest;
+use App\Models\comments;
+use App\Models\Photos;
 use App\Models\Problem;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -106,6 +108,18 @@ class problemController extends Controller
         } catch (\Throwable $th) {
             return redirect()->route('problem.list')->with('action', 'edit')->with('type', 'general-error');
         }
+    }
+
+    public function preview(string $id)
+    {
+        $problem = Problem::find($id);
+        $comment = comments::where('problem_id', '=', $id)->get();
+        $photo = Photos::where('problem_id', '=', $id)->get();
+
+        return view('problem.previewProblem')
+            ->with('problem', $problem)
+            ->with('comment', $comment)
+            ->with('photo', $photo);
     }
 
     /**
