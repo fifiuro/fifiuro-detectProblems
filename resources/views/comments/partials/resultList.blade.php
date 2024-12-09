@@ -31,8 +31,8 @@
                                 NN
                             @endisset
                         </td>
-                        <td>{{ $d->comment }}</td>
-                        <td>{{ $d->solution }}</td>
+                        <td>{!! $d->comment !!}</td>
+                        <td>{!! $d->solution !!}</td>
                         <td>
                             @if ($d->type == 'O')
                                 @if ($data->oficial)

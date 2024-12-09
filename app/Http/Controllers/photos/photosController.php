@@ -17,7 +17,7 @@ class photosController extends Controller
     public function index($problem_id)
     {
         $header = Problem::find($problem_id);
-        $data = Photos::with('problem')->where('problem_id', '=', $problem_id)->get();
+        $data = Photos::with('problem')->where('problem_id', '=', $problem_id)->orderBy('updated_at', 'asc')->get();
 
         return $this->returnSearch(session('action') ? session('action') : 'find', session('type') ? session('type') : 'success', $header, $data);
     }
@@ -62,7 +62,7 @@ class photosController extends Controller
                     }
                 }
             } else {
-                return redirect()->route('photos.list', $request->problem_id)->with('action', 'add')->with('type', 'not-image-format');
+                return redirect()->route('photos.list', $request->problem_id)->with('action', 'add')->with('type', 'success');
             }
 
             if ($good > 0) {
@@ -125,6 +125,29 @@ class photosController extends Controller
         } catch (\Throwable $th) {
             return redirect()->route('photos.list', $problem_id)->with('action', 'delete')->with('type', 'general-error');
         }
+    }
+
+    public function choose($id, $problem_id)
+    {
+        try {
+            $this->allFalsePhotos($problem_id);
+            $photos = Photos::find($id);
+            if ($photos) {
+                $photos->choose = !$photos->choose;
+                if ($photos->save()) {
+                    return redirect()->route('photos.list', $problem_id)->with('action', 'edit')->with('type', 'success');
+                } else {
+                    return redirect()->route('photos.list', $problem_id)->with('action', 'edit')->with('type', 'danger');
+                }
+            }
+        } catch (\Throwable $th) {
+            return redirect()->route('photos.list', $problem_id)->with('action', 'edit')->with('type', 'general-error');
+        }
+    }
+
+    public function allFalsePhotos($problem_id)
+    {
+        $photos = Photos::query()->where('problem_id', '=', $problem_id)->update(['choose' => false]);
     }
 
     public function returnSearch($action, $type, $header, $data)

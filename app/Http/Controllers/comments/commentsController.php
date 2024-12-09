@@ -85,6 +85,7 @@ class commentsController extends Controller
             $data = comments::find($id);
             if ($data) {
                 $data->comment = $request->comment;
+                $data->solution = $request->solution;
                 $data->type = $request->type;
                 if ($data->update()) {
                     return redirect()->route('comments.list', $request->problem_id)->with('action', 'edit')->with('type', 'success');

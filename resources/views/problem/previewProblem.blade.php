@@ -58,59 +58,88 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <div class="card card-info">
+            <div class="card card-success">
                 <div class="card-header">
-                    <h3 class="card-title">Lista de Fotos</h3>
+                    <h3 class="card-title">Vista Previa WhatsApp</h3>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            @foreach ($photo as $key => $d)
+                    <div class="col-md-12">
+                        @foreach ($photo as $key => $d)
+                            @if ($d->choose)
                                 <div class="col-md-12 pb-4">
                                     <img src="{{ asset('storage/' . $d->path) }}" alt="{{ $d->filename }}"
                                         style="width:100%; height:auto;">
                                 </div>
-                            @endforeach
-                        </div>
+                            @endif
+                        @endforeach
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card card-info">
-                <div class="card-header">
-                    <h3 class="card-title">Lista de Comentarios</h3>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                                {{-- {{ dd($comment) }} --}}
-                            <table class="table table-stripped table-hover">
-                                <thead>
-                                    <th>Tipo</th>
-                                    <th>Comentario</th>
-                                    <th>Solución</th>
-                                </thead>
-                                <tbody>
-                                    @foreach ($comment as $key => $c)
-                                    <tr>
-                                        <td>
-                                            @if ($c->type == 'C')
-                                                Comentario
-                                            @elseif ($c->type == 'O')
-                                                Oficial
-                                            @endif
-                                        </td>
-                                        <td>{{ $c->comment }}</td>
-                                        <td>{{ $c->solution }}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="col-md-12">
+                        @foreach ($comment as $key => $c)
+                            @if ($c->type == 'O')
+                                {!! $c->comment !!}
+                                {!! $c->solution !!}
+                            @endif
+                        @endforeach
                     </div>
                 </div>
                 </form>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Lista de Comentarios</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-stripped table-hover">
+                                    <thead>
+                                        <th>Tipo</th>
+                                        <th>Comentario</th>
+                                        <th>Solución</th>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($comment as $key => $c)
+                                            <tr>
+                                                <td>
+                                                    @if ($c->type == 'C')
+                                                        Comentario
+                                                    @elseif ($c->type == 'O')
+                                                        Oficial
+                                                    @endif
+                                                </td>
+                                                <td>{!! $c->comment !!}</td>
+                                                <td>{!! $c->solution !!}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Lista de Fotos</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                @foreach ($photo as $key => $d)
+                                    <div class="col-md-12 pb-4">
+                                        <img src="{{ asset('storage/' . $d->path) }}" alt="{{ $d->filename }}"
+                                            style="width:100%; height:auto;">
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

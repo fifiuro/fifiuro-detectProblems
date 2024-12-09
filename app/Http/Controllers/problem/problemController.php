@@ -113,7 +113,7 @@ class problemController extends Controller
     public function preview(string $id)
     {
         $problem = Problem::find($id);
-        $comment = comments::where('problem_id', '=', $id)->get();
+        $comment = comments::orderBy('created_at', 'desc')->where('problem_id', '=', $id)->get();
         $photo = Photos::where('problem_id', '=', $id)->get();
 
         return view('problem.previewProblem')

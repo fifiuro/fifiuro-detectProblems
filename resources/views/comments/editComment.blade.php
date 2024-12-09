@@ -23,10 +23,14 @@
                             <div class="col-md-12">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="type">Tipo <span class="text-danger">*</span> {{ $data->type }} </label>
+                                        <label for="type">Tipo <span class="text-danger">*</span> {{ $data->type }}
+                                        </label>
                                         <select name="type" id="type" class="form-control">
-                                            <option value="C" {{ old('comment', $data->type) == 'C' ? 'selected' : '' }}>Comnentario</option>
-                                            <option value="O" {{ old('comment', $data->type) == 'O' ? 'selected' : '' }}>Oficial</option>
+                                            <option value="C"
+                                                {{ old('comment', $data->type) == 'C' ? 'selected' : '' }}>Comnentario
+                                            </option>
+                                            <option value="O"
+                                                {{ old('comment', $data->type) == 'O' ? 'selected' : '' }}>Oficial</option>
                                         </select>
                                         @error('type')
                                             <span class="text-danger">{{ $message }}</span>
@@ -36,7 +40,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="comment">Comentario <span class="text-danger">*</span></label>
-                                        <textarea name="comment" id="comment" cols="30" rows="5" class="form-control">{{ old('comment', $data->comment) }}</textarea>
+                                        <textarea name="comment" id="summernoteComentario">{{ old('comment', $data->comment) }}</textarea>
                                         @error('comment')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -45,7 +49,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="solution">Posible Solución <span class="text-danger">*</span></label>
-                                        <textarea name="solution" id="solution" cols="30" rows="5" class="form-control">{{ old('solution', $data->solution) }}</textarea>
+                                        <textarea name="solution" id="summernoteSolucion">{{ old('solution', $data->solution) }}</textarea>
                                         @error('solution')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -75,4 +79,33 @@
         </div>
         <div class="col-md-1 col-sm-12"></div>
     </div>
+    <script type="module">
+        $(document).ready(function() {
+            $('#summernoteComentario').summernote({
+                height: 300,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['view', ['codeview']]
+                ]
+            });
+
+            $('#summernoteSolucion').summernote({
+                height: 300,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['view', ['codeview']]
+                ]
+            });
+        });
+    </script>
 @stop

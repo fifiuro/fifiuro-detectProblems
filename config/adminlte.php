@@ -459,6 +459,21 @@ return [
                 ],
             ],
         ],
+        'summernote' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/summernote/summernote-bs4.css',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/summernote/summernote-bs4.js',
+                ],
+            ],
+        ],
     ],
 
     /*

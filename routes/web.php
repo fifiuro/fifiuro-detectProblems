@@ -23,6 +23,7 @@ Auth::routes(['register' => false]);
 Route::group(['scheme' => env('ROUTE_HTTPS')], function () {
     // Ruta Principal
     Route::get('/', [firstPageController::class, 'index'])->name('first.page')->middleware(['auth']);
+    Route::get('/find', [firstPageController::class, 'show'])->name('find')->middleware(['auth']);
     // Rutas Problema
     Route::get('/problem.list', [problemController::class, 'index'])->name('problem.list')->middleware(['auth']);
     Route::get('/problem.find', [problemController::class, 'show'])->name('problem.find')->middleware(['auth']);
@@ -44,6 +45,7 @@ Route::group(['scheme' => env('ROUTE_HTTPS')], function () {
     Route::get('/photos.new/{problem_id}', [photosController::class, 'create'])->name('photos.new')->middleware(['auth']);
     Route::post('/photos.create', [photosController::class, 'store'])->name('photos.create')->middleware(['auth']);
     Route::get('/photos.destroy/{id}/{problem_id}', [photosController::class, 'destroy'])->name('photos.destroy')->middleware(['auth']);
+    Route::get('/photos.choose/{id}/{problem_id}', [photosController::class, 'choose'])->name('photos.choose')->middleware(['auth']);
     // Rutas de Usuarios
     Route::get('/users.list', [usersController::class, 'index'])->name('users.list');
     Route::get('/users.find', [usersController::class, 'show'])->name('users.find');

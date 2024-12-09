@@ -1,13 +1,13 @@
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Lista de Comentarios</h3>
+        <h3 class="card-title">Lista de Imagenes</h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
         <div class="row">
             @foreach ($data as $key => $d)
                 <div class="col-md-4">
-                    <div class="card">
+                    <div class="card" style="{{ ($d->choose) ? 'border: 2px solid rgb(92, 210, 92);' : '' }} ">
                         <div class="card-body">
                             <div class="col-md-12 text-center">
                                 <img src="{{ asset('storage/' . $d->path) }}" alt="{{ $d->filename }}"
@@ -17,6 +17,11 @@
                         <div class="card-footer">
                             <div class="input-group">
                                 <div class="row">
+                                    <a href="{{ route('photos.choose', [ 'id' => $d->id, 'problem_id' => $header->id ]) }}" class="btn btn-modal {{ ($d->choose) ? 'btn-success' : 'btn-danger' }}">
+                                        <i class="{{ ($d->choose) ? 'fas fa-check' : 'fas fa-times' }}"></i>
+                                    </a>
+
+
                                     <a href="#" class="btn btn-primary btn-modal" data-toggle="modal"
                                         data-target="#modal-eliminar" data-type='view'
                                         data-problem_id="{{ $header->id }}" data-id="{{ $d->id }}"

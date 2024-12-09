@@ -36,7 +36,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="comment">Comentario <span class="text-danger">*</span></label>
-                                        <textarea name="comment" id="comment" cols="30" rows="5" class="form-control">{{ old('comment') }}</textarea>
+                                        {{-- <textarea name="comment" id="comment" cols="30" rows="5" class="form-control">{{ old('comment') }}</textarea> --}}
+                                        <textarea name="comment" id="summernoteComentario">{{ old('comment') }}</textarea>
                                         @error('comment')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -45,7 +46,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="solution">Posible Solución <span class="text-danger">*</span></label>
-                                        <textarea name="solution" id="solution" cols="30" rows="5" class="form-control">{{ old('solution') }}</textarea>
+                                        {{-- <textarea name="solution" id="solution" cols="30" rows="5" class="form-control">{{ old('solution') }}</textarea> --}}
+                                        <textarea name="solution" id="summernoteSolucion">{{ old('solution') }}</textarea>
                                         @error('solution')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -75,4 +77,33 @@
         </div>
         <div class="col-md-1 col-sm-12"></div>
     </div>
+    <script type="module">
+        $(document).ready(function() {
+            $('#summernoteComentario').summernote({
+                height: 300,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['view', ['codeview']]
+                ]
+            });
+
+            $('#summernoteSolucion').summernote({
+                height: 300,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['view', ['codeview']]
+                ]
+            });
+        });
+    </script>
 @stop

@@ -8,6 +8,10 @@
 
 @section('content')
     <div class="row">
+        <div class="col-md-12">
+            @include('partialsGlobal.searchPanel')
+        </div>
+
         @foreach ($data as $key => $d)
             <div class="col-md-4">
                 <div class="card card-info">
@@ -20,12 +24,12 @@
                                 <div class="col-md-12 text-center">
                                     @isset($d->path)
                                         <img src="{{ asset('storage/' . $d->path) }}" alt="{{ $d->filename }}"
-                                            style="width:200px; height:auto;">
+                                            style="width:100%;">
                                     @endisset
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <label for="">Problem: </label> {{ $d->problem }}
+                            <div class="col-md-12 pt-4">
+                                <label for="">Problema: </label> {{ $d->problem }}
                             </div>
                             <div class="col-md-6">
                                 <label for="">Coordenadas: </label> <a href="{{ $d->coordinates }}" target="_blank">
@@ -36,12 +40,12 @@
                                 <label for="">Zona: </label> {{ $d->zone }}
                                 </a>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <label for="">Calle / Avenida: </label> {{ $d->street }}
                                 </a>
                             </div>
                             <div class="col-md-12">
-                                <label for="">Calle / Avenida: </label> {{ $d->street }}
+                                <label for="">Fecha: </label> {{ \Carbon\Carbon::parse($d->date)->format('d/m/Y') }}
                                 </a>
                             </div>
                         </div>
