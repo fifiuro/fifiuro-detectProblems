@@ -36,7 +36,6 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="comment">Comentario <span class="text-danger">*</span></label>
-                                        {{-- <textarea name="comment" id="comment" cols="30" rows="5" class="form-control">{{ old('comment') }}</textarea> --}}
                                         <textarea name="comment" id="summernoteComentario">{{ old('comment') }}</textarea>
                                         @error('comment')
                                             <span class="text-danger">{{ $message }}</span>
@@ -46,7 +45,6 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="solution">Posible Solución <span class="text-danger">*</span></label>
-                                        {{-- <textarea name="solution" id="solution" cols="30" rows="5" class="form-control">{{ old('solution') }}</textarea> --}}
                                         <textarea name="solution" id="summernoteSolucion">{{ old('solution') }}</textarea>
                                         @error('solution')
                                             <span class="text-danger">{{ $message }}</span>
@@ -104,6 +102,32 @@
                     ['view', ['codeview']]
                 ]
             });
+
+            $('#type').change(function() {
+                var id = $("#problem_id").val();
+                if ($(this).val() == 'O') {
+                    $.ajax({
+                        url: '{{ route('comments.all') }}',
+                        type: 'GET',
+                        data: {
+                            id: id
+                        },
+                        success: function(response) {
+                            $.each(response, function(index, item) {
+                                console.log(response[0]);
+                                $('#summernoteComentario').summernote('code', response[
+                                    0]);
+                                $('#summernoteSolucion').summernote('code', response[
+                                1]);
+                            });
+                        }
+                    });
+                } else {
+                    $('#summernoteComentario').summernote('code', '');
+                    $('#summernoteSolucion').summernote('code', '');
+                }
+            });
+
         });
     </script>
 @stop

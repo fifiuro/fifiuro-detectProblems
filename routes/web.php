@@ -40,6 +40,7 @@ Route::group(['scheme' => env('ROUTE_HTTPS')], function () {
     Route::get('/comments.edit/{id}', [commentsController::class, 'edit'])->name('comments.edit')->middleware(['auth']);
     Route::post('/comments.update/{id}', [commentsController::class, 'update'])->name('comments.update')->middleware(['auth']);
     Route::get('/comments.destroy/{id}/{problem_id}', [commentsController::class, 'destroy'])->name('comments.destroy')->middleware(['auth']);
+    Route::get('/comments.all', [commentsController::class, 'allComments'])->name('comments.all')->middleware(['auth']);
     // Rutas de Photos
     Route::get('/photos.list/{problem_id}', [photosController::class, 'index'])->name('photos.list')->middleware(['auth']);
     Route::get('/photos.new/{problem_id}', [photosController::class, 'create'])->name('photos.new')->middleware(['auth']);

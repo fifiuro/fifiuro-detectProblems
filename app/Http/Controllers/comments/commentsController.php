@@ -121,6 +121,17 @@ class commentsController extends Controller
         }
     }
 
+    public function allComments(Request $request)
+    {
+        try {
+            $comments = comments::where('problem_id', '=', $request->id)->pluck('comment')->implode(' ');
+            $solutions = comments::where('problem_id', '=', $request->id)->pluck('solution')->implode(' ');            
+            return [ $comments, $solutions];
+        } catch (\Throwable $th) {
+            return "No se pudo recuperar los datos seleccionados.";
+        }
+    }
+
     public function returnSearch($action, $type, $header, $data)
     {
         $m = Messages::mesagesAction($action, $type);
