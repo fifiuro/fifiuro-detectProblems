@@ -50,15 +50,17 @@
 
                             @if ($d->type == 'C')
                                 @if (!$data->oficial)
-                                    <a href="{{ route('comments.edit', $d->id) }}" class="btn btn-info">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-danger btn-modal" data-toggle="modal"
-                                        data-target="#modal-eliminar" data-problem_id="{{ $header->id }}"
-                                        data-id="{{ $d->id }}" data-type="{{ $d->type }}"
-                                        data-comment="{{ $d->comment }}">
-                                        <i class="far fa-trash-alt"></i>
-                                    </a>
+                                    @if ($d->user_id == Auth::user()->id)
+                                        <a href="{{ route('comments.edit', $d->id) }}" class="btn btn-info">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-modal" data-toggle="modal"
+                                            data-target="#modal-eliminar" data-problem_id="{{ $header->id }}"
+                                            data-id="{{ $d->id }}" data-type="{{ $d->type }}"
+                                            data-comment="{{ $d->comment }}">
+                                            <i class="far fa-trash-alt"></i>
+                                        </a>
+                                    @endif
                                 @endif
                             @endif
                         </td>

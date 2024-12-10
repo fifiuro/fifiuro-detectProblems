@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\users\usersCreateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class usersController extends Controller
 {
@@ -27,7 +28,7 @@ class usersController extends Controller
         $data = User::when($request->filled('username'), function ($query) use ($request) {
             $query->where('username', 'like', '%' . $request->username . '%');
         })
-        ->paginate(10);
+            ->paginate(10);
         return $this->returnSearch('find', 'success', $data);
     }
 
@@ -69,7 +70,7 @@ class usersController extends Controller
     {
         $data = User::find($id);
 
-        return view('users.editUser')->with('id',$id)->with('data',$data);
+        return view('users.editUser')->with('id', $id)->with('data', $data);
     }
 
     /**
@@ -85,19 +86,35 @@ class usersController extends Controller
                 $data->username = $request->username;
                 $data->email = $request->email;
                 $data->type = $request->type;
-                if(isset($request->password)){
+                if (isset($request->password)) {
                     $data->password = bcrypt($request->password);
                 }
                 if ($data->update()) {
-                    return redirect()->route('users.list')->with('action', 'edit')->with('type', 'success');
+                    if (Auth::user()->type == 'user') {
+                        return redirect()->route('problem.list')->with('action', 'edit')->with('type', 'success');
+                    } else {
+                        return redirect()->route('users.list')->with('action', 'edit')->with('type', 'success');
+                    }
                 } else {
-                    return redirect()->route('users.list')->with('action', 'edit')->with('type', 'danger');
+                    if (Auth::user()->type == 'user') {
+                        return redirect()->route('problem.list')->with('action', 'edit')->with('type', 'danger');
+                    } else {
+                        return redirect()->route('users.list')->with('action', 'edit')->with('type', 'danger');
+                    }
                 }
             } else {
-                return redirect()->route('users.list')->with('action', 'edit')->with('type', 'exists');
+                if (Auth::user()->type == 'user') {
+                    return redirect()->route('problem.list')->with('action', 'edit')->with('type', 'exists');
+                } else {
+                    return redirect()->route('users.list')->with('action', 'edit')->with('type', 'exists');
+                }
             }
         } catch (\Throwable $th) {
-            return redirect()->route('users.list')->with('action', 'edit')->with('type', 'general-error');
+            if (Auth::user()->type == 'user') {
+                return redirect()->route('problem.list')->with('action', 'edit')->with('type', 'general-error');
+            } else {
+                return redirect()->route('users.list')->with('action', 'edit')->with('type', 'general-error');
+            }
         }
     }
 
@@ -108,13 +125,13 @@ class usersController extends Controller
     {
         try {
             $data = User::find($id);
-            if($data){
-                if($data->delete()){
+            if ($data) {
+                if ($data->delete()) {
                     return redirect()->route('users.list')->with('action', 'delete')->with('type', 'success');
-                }else{
+                } else {
                     return redirect()->route('users.list')->with('action', 'delete')->with('type', 'danger');
                 }
-            }else{
+            } else {
                 return redirect()->route('users.list')->with('action', 'destroy')->with('type', 'exists');
             }
         } catch (\Throwable $th) {

@@ -23,7 +23,7 @@
                             <div class="col-md-12">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="type">Tipo <span class="text-danger">*</span> {{ $data->type }}
+                                        <label for="type">Tipo <span class="text-danger">*</span>
                                         </label>
                                         <select name="type" id="type" class="form-control">
                                             <option value="C"

@@ -22,7 +22,7 @@ class userTableSeeder extends Seeder
                 'username' => 'admin',
                 'email' => 'admin@correo.com',
                 'type' => 'admin',
-                'password' => '$2y$12$/cl0p3vPCwg87t41FpB3mevZe86i2oUralj4uMkR6J4N66E7f.ioq',
+                'password' => '$2y$12$uElge4..mwn5F7ejMmiD/OAehhyJzHtI8vQL1jHQ59NJJhdaF6raS',
             ]
         ];
 

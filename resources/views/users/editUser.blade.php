@@ -21,12 +21,24 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    {{-- {{ dd(Auth::user()) }} --}}
                                     <label for="type">Tipo de Usuario <span class="text-danger">*</span></label>
-                                    <select name="type" id="type" class="form-control">
-                                        <option value="">Selecionar una opción</option>
-                                        <option value="user" {{ old('type', $data->type) == 'user' ? 'selected' : '' }}>Usuario</option>
-                                        <option value="admin" {{ old('type', $data->type) == 'admin' ? 'selected' : '' }}>Administrador</option>
-                                    </select>
+                                    @if (Auth::user()->type == 'user')
+                                        <select name="type" id="type" class="form-control">
+                                            <option value="">Selecionar una opción</option>
+                                            <option value="user"
+                                                {{ old('type', $data->type) == 'user' ? 'selected' : '' }}>Usuario</option>
+                                        </select>
+                                    @elseif(Auth::user()->type == 'admin')
+                                        <select name="type" id="type" class="form-control">
+                                            <option value="">Selecionar una opción</option>
+                                            <option value="user"
+                                                {{ old('type', $data->type) == 'user' ? 'selected' : '' }}>Usuario</option>
+                                            <option value="admin"
+                                                {{ old('type', $data->type) == 'admin' ? 'selected' : '' }}>Administrador
+                                            </option>
+                                        </select>
+                                    @endif
                                     @error('type')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -46,7 +58,8 @@
                                 <div class="form-group">
                                     <label for="last_name">Apellidos <span class="text-danger">*</span></label>
                                     <input type="text" name="last_name" class="form-control" id="last_name"
-                                        placeholder="Apellidos" value="{{ old('last_name', $data->last_name) }}" autocomplete="off">
+                                        placeholder="Apellidos" value="{{ old('last_name', $data->last_name) }}"
+                                        autocomplete="off">
                                     @error('last_name')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -56,7 +69,8 @@
                                 <div class="form-group">
                                     <label for="username">Nombre de Usuario <span class="text-danger">*</span></label>
                                     <input type="text" name="username" class="form-control" id="username"
-                                        placeholder="Nombre de Usuario" value="{{ old('username', $data->username) }}" autocomplete="off">
+                                        placeholder="Nombre de Usuario" value="{{ old('username', $data->username) }}"
+                                        autocomplete="off">
                                     @error('username')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -66,7 +80,8 @@
                                 <div class="form-group">
                                     <label for="email">Correo Electrónico <span class="text-danger">*</span></label>
                                     <input type="text" name="email" class="form-control" id="email"
-                                        placeholder="Correo Electrónico" value="{{ old('email', $data->email) }}" autocomplete="off">
+                                        placeholder="Correo Electrónico" value="{{ old('email', $data->email) }}"
+                                        autocomplete="off">
                                     @error('email')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -103,11 +118,19 @@
                                         GUARDAR
                                     </button>
                                 </div>
-                                <div class="col-md-6">
-                                    <a href="{{ route('users.list') }}" class="btn btn-danger">
-                                        CANCELAR
-                                    </a>
-                                </div>
+                                @if (Auth::user()->type == 'user')
+                                    <div class="col-md-6">
+                                        <a href="{{ route('problem.list') }}" class="btn btn-danger">
+                                            CANCELAR
+                                        </a>
+                                    </div>
+                                @else
+                                    <div class="col-md-6">
+                                        <a href="{{ route('users.list') }}" class="btn btn-danger">
+                                            CANCELAR
+                                        </a>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

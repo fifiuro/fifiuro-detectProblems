@@ -23,7 +23,8 @@
                  alt="{{ Auth::user()->name }}">
         @endif
         <span @if(config('adminlte.usermenu_image')) class="d-none d-md-inline" @endif>
-            {{ Auth::user()->name }}
+            <i class="fas fa-user-circle text-primary pr-2" style="font-size: 20px;"></i>
+            {{ Auth::user()->name }} {{ Auth::user()->last_name }}
         </span>
     </a>
 
@@ -79,6 +80,12 @@
                 @endif
                 {{ csrf_field() }}
             </form>
+
+            <a class="btn btn-default btn-flat float-right @if(!$profile_url) btn-block @endif"
+               href="{{ route('users.edit', Auth::user()->id) }}">
+                <i class="far fa-edit text-primary"></i>
+                Editar Perfil
+            </a>
         </li>
 
     </ul>

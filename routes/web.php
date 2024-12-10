@@ -48,11 +48,11 @@ Route::group(['scheme' => env('ROUTE_HTTPS')], function () {
     Route::get('/photos.destroy/{id}/{problem_id}', [photosController::class, 'destroy'])->name('photos.destroy')->middleware(['auth']);
     Route::get('/photos.choose/{id}/{problem_id}', [photosController::class, 'choose'])->name('photos.choose')->middleware(['auth']);
     // Rutas de Usuarios
-    Route::get('/users.list', [usersController::class, 'index'])->name('users.list');
-    Route::get('/users.find', [usersController::class, 'show'])->name('users.find');
-    Route::get('/users.new', [usersController::class, 'create'])->name('users.new');
-    Route::post('/users.create', [usersController::class, 'store'])->name('users.create');
-    Route::get('/users.edit/{id}', [usersController::class, 'edit'])->name('users.edit');
-    Route::post('/users.update/{id}', [usersController::class, 'update'])->name('users.update');
-    Route::get('/users.destroy/{id}', [usersController::class, 'destroy'])->name('users.destroy');
+    Route::get('/users.list', [usersController::class, 'index'])->name('users.list')->middleware(['auth']);
+    Route::get('/users.find', [usersController::class, 'show'])->name('users.find')->middleware(['auth']);
+    Route::get('/users.new', [usersController::class, 'create'])->name('users.new')->middleware(['auth']);
+    Route::post('/users.create', [usersController::class, 'store'])->name('users.create')->middleware(['auth']);
+    Route::get('/users.edit/{id}', [usersController::class, 'edit'])->name('users.edit')->middleware(['auth']);
+    Route::post('/users.update/{id}', [usersController::class, 'update'])->name('users.update')->middleware(['auth']);
+    Route::get('/users.destroy/{id}', [usersController::class, 'destroy'])->name('users.destroy')->middleware(['auth']);
 });
