@@ -14,7 +14,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Nuevo Usuario</h3>
                 </div>
-                <form action="{{ route('users.create') }}" method="POST">
+                <form action="{{ route('users.create') }}" method="POST" id="userForm" onsubmit="return validatePasswords()">
                     @csrf
                     @method('POST')
                     <div class="card-body">
@@ -75,8 +75,15 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="password">Contraseña <span class="text-danger">*</span></label>
-                                    <input type="password" name="password" class="form-control" id="password"
-                                        placeholder="Contraseña">
+                                    <div class="input-group">
+                                        <input type="password" name="password" class="form-control" id="password"
+                                            placeholder="Contraseña">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-info" type="button" id="togglePassword">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                     @error('password')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -86,8 +93,15 @@
                                 <div class="form-group">
                                     <label for="password_confirmation">Confirmar Contraseña <span
                                             class="text-danger">*</span></label>
-                                    <input type="password" name="password_confirmation" class="form-control"
-                                        id="password_confirmation" placeholder="Contraseña">
+                                    <div class="input-group">
+                                        <input type="password" name="password_confirmation" class="form-control"
+                                            id="password_confirmation" placeholder="Confirmar Contraseña">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-info" type="button" id="toggleConfirmPassword">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                     @error('password_confirmation')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -116,4 +130,63 @@
         </div>
         <div class="col-md-1 col-sm-12"></div>
     </div>
+@stop
+
+@section('js')
+<script>
+    function togglePasswordVisibility(inputId, buttonId) {
+        const input = document.getElementById(inputId);
+        const button = document.getElementById(buttonId);
+        const icon = button.querySelector('i');
+        
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    }
+
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        togglePasswordVisibility('password', 'togglePassword');
+    });
+
+    document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+        togglePasswordVisibility('password_confirmation', 'toggleConfirmPassword');
+    });
+
+    function validatePasswords() {
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('password_confirmation');
+        
+        // Remove any existing error messages
+        const existingError = document.getElementById('password-match-error');
+        if (existingError) {
+            existingError.remove();
+        }
+
+        // Check if passwords match
+        if (password.value !== confirmPassword.value) {
+            // Create error message
+            const errorDiv = document.createElement('div');
+            errorDiv.id = 'password-match-error';
+            errorDiv.className = 'alert alert-danger mt-2';
+            errorDiv.textContent = 'Las contraseñas no coinciden';
+            
+            // Insert error after confirm password field
+            confirmPassword.parentNode.parentNode.insertBefore(errorDiv, confirmPassword.parentNode.nextSibling);
+            
+            return false;
+        }
+        
+        return true;
+    }
+
+    // Add input event listeners to validate in real-time
+    document.getElementById('password').addEventListener('input', validatePasswords);
+    document.getElementById('password_confirmation').addEventListener('input', validatePasswords);
+</script>
 @stop
